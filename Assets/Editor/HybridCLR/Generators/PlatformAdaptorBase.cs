@@ -86,7 +86,7 @@ NativeCallMethod huatuo::interpreter::g_callStub[] =
 
             foreach (var method in methods)
             {
-                lines.Add($"\t{{\"{method.CreateInvokeSigName()}\", (Il2CppMethodPointer)__Native2ManagedCall_{method.CreateInvokeSigName()}, (Il2CppMethodPointer)__Native2ManagedCall_AdjustorThunk_{method.CreateCallSigName()}, __Managed2NativeCall_{method.CreateInvokeSigName()}}},");
+                lines.Add($"\t{{\"{method.CreateInvokeSigName()}\", (Il2CppMethodPointer)__Native2ManagedCall_{method.CreateInvokeSigName()}, (Il2CppMethodPointer)__Native2ManagedCall_AdjustorThunk_{method.CreateCallSigName()}, __Managed2NativeCall_{method.CreateInvokeSigName()}, (Il2CppMethodPointer)__Native2NativeStatic_AdjustorThunk_{method.CreateInvokeSigName()}}},");
             }
 
             lines.Add($"\t{{nullptr, nullptr}},");

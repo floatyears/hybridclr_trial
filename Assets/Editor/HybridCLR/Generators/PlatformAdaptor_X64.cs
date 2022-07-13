@@ -160,6 +160,18 @@ static void* __Invoke_static_{method.CreateCallSigName()}(Il2CppMethodPointer __
 }}
 #endif
 ");
+
+            var paramList = method.ParamInfos.Select(p => $"{p.Type.GetTypeName()} __arg{p.Index}").Concat(new string[] { "const MethodInfo* method" });
+            var paramListEx = method.ParamInfos.Select(p => $"__arg{p.Index}").Concat(new string[] { "method" });
+            lines.Add($@"
+
+static {method.ReturnInfo.Type.GetTypeName()} __Native2NativeStatic_AdjustorThunk_{method.CreateCallSigName()}({string.Join(",", new string[] { "const void* thisObj" }.Concat(paramList))})
+{{
+    typedef {method.ReturnInfo.Type.GetTypeName()} (*FunctionPointerType)({string.Join(",", paramList)});
+    return ((FunctionPointerType)method->methodPointer)({string.Join(",", paramListEx)});
+}}
+
+");
         }
 
 
